@@ -13,7 +13,8 @@ typedef struct Tarea {
 void CargarTareas(Tarea ** ListaDeTareas, Tarea ** TareasRealizadas, int CantTareas);
 void MoverRealizadas(Tarea ** ListaDeTareas, Tarea ** TareasRealizadas, int CantTareas);
 void ListarTareas(Tarea ** ListaDeTareas, Tarea ** TareasRealizadas, int CantTareas);
-Tarea BuscarTarea(Tarea * Lista, int ID, int CantTareas);
+Tarea BusquedaPorPalabra(Tarea * Lista, char * palabra, int CantTareas);
+Tarea BusquedaPorID(Tarea * Lista, int ID, int CantTareas);
 
 int main () {
     int CantTareas;
@@ -114,7 +115,21 @@ void ListarTareas(Tarea ** ListaDeTareas, Tarea ** TareasRealizadas, int CantTar
     } //for end    
 }
 
-Tarea BuscarTarea(Tarea * Lista, int ID, int CantTareas) {
+Tarea BusquedaPorPalabra(Tarea * Lista, char * palabra, int CantTareas) {
+    for (int i = 0; i < CantTareas; i++)
+    {
+        if ((Lista + i) != NULL && strstr(Lista[i].Descripcion, palabra))
+        {
+            printf("\n------- TAREA ENCONTRADA -------\n");
+            printf("Tarea ID: %d\n", Lista[i].TareaID);
+            printf("Descripcion: %s\n", Lista[i].Descripcion);
+            printf("Duracion: %d\n", Lista[i].Duracion);
+            return *(Lista + i);
+        } //if end
+    } //for end
+}
+
+Tarea BusquedaPorID(Tarea * Lista, int ID, int CantTareas) {
     for (int i = 0; i < CantTareas; i++)
     {
         if ((Lista + i) != NULL && (Lista + i)->TareaID == ID)
