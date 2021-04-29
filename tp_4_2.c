@@ -17,8 +17,9 @@ Tarea BusquedaPorPalabra(Tarea * Lista, char * palabra, int CantTareas);
 Tarea BusquedaPorID(Tarea * Lista, int ID, int CantTareas);
 
 int main () {
-    int CantTareas;
-    Tarea ** ToDo, ** Realizadas;
+    char PalabraClave[MAX/5];
+    int CantTareas, ID;
+    Tarea ** ToDo, ** Realizadas, buscada1, buscada2;
 
     printf("Cuantas tareas desea ingresar?\n");
     scanf("%d", &CantTareas);
@@ -30,6 +31,15 @@ int main () {
     ListarTareas(ToDo, Realizadas, CantTareas);
     MoverRealizadas(ToDo, Realizadas, CantTareas);
     ListarTareas(ToDo, Realizadas, CantTareas);
+
+    printf("\nIngrese una palabra para buscar una tarea:\n");
+    fflush(stdin);
+    gets(PalabraClave);
+    buscada1 = BusquedaPorPalabra(*ToDo, PalabraClave, CantTareas);
+
+    printf("\nIngrese un ID (numero entero) para buscar una tarea:\n");
+    scanf("%d", &ID);
+    buscada2 = BusquedaPorID(*ToDo, ID, CantTareas);
 
     for (int i = 0; i < CantTareas; i++)
     {
